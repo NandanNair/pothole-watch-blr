@@ -3,6 +3,10 @@ services:
   db:
     image: postgis/postgis:16-3.4
     env_file: .env
+    ports:
+      # Published on localhost only, so tests and tools on this machine can
+      # reach the database but other devices on the network cannot.
+      - "127.0.0.1:5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
