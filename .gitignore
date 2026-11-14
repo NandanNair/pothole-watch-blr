@@ -1,0 +1,66 @@
+# --- Secrets and local config ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+dist/
+build/
+
+# --- Node ---
+node_modules/
+frontend/dist/
+frontend/dev-dist/
+npm-debug.log*
+.vite/
+
+# --- Docker / local data ---
+docker-compose.override.yml
+pgdata/
+*.sql.gz
+
+# --- Datasets (downloaded by scripts, never committed) ---
+ml/data/
+ml/datasets/
+*.zip
+*.tar
+*.tar.gz
+
+# --- Model weights and training runs (published via GitHub Releases) ---
+*.pt
+*.pth
+*.onnx
+*.engine
+ml/runs/
+runs/
+
+# --- User-uploaded photos (may contain personal data) ---
+uploads/
+media/
+backend/uploads/
+backend/media/
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Claude Code local settings ---
+.claude/settings.local.json
