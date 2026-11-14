@@ -10,6 +10,11 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115",
     "uvicorn[standard]>=0.30",
+    "sqlalchemy>=2.0",
+    "geoalchemy2>=0.15",
+    "psycopg[binary]>=3.2",
+    "alembic>=1.13",
+    "pydantic-settings>=2.4",
 ]
 
 [project.optional-dependencies]
@@ -19,8 +24,8 @@ dev = [
     "ruff>=0.6",
 ]
 
-[tool.setuptools]
-packages = ["app"]
+[tool.setuptools.packages.find]
+include = ["app*"]
 
 [tool.ruff]
 line-length = 100
@@ -29,6 +34,10 @@ target-version = "py312"
 [tool.ruff.lint]
 # E/F: basic errors, I: import order, B: likely bugs, UP: modern syntax, S: security
 select = ["E", "F", "I", "B", "UP", "S"]
+
+[tool.ruff.lint.isort]
+# The local alembic/ folder makes ruff think the alembic library is our own code.
+known-third-party = ["alembic"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["S101"]  # asserts are how pytest works
