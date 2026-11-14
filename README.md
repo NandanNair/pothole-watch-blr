@@ -33,7 +33,10 @@ The API is then at http://localhost:8000 and its interactive docs at http://loca
 
 ## Run the backend tests
 
+The tests use a real PostGIS database, so start it first.
+
 ```bash
+docker compose up -d db
 cd backend
 python -m venv .venv
 .venv/Scripts/activate        # macOS/Linux: source .venv/bin/activate

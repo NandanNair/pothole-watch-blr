@@ -12,6 +12,21 @@ jobs:
   backend:
     name: Backend lint and tests
     runs-on: ubuntu-latest
+    # A real PostGIS database for the tests, started alongside the job.
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_USER: pothole
+          POSTGRES_PASSWORD: change-me
+          POSTGRES_DB: pothole_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U pothole -d pothole_test"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
     defaults:
       run:
         working-directory: backend
@@ -42,6 +57,8 @@ jobs:
         run: docker compose up --build --detach --wait
       - name: Call the health endpoint
         run: curl --fail --silent --show-error http://localhost:8000/health
+      - name: Check the API can reach the migrated database
+        run: curl --fail --silent --show-error http://localhost:8000/ready
       - name: Show logs on failure
         if: failure()
         run: docker compose logs
