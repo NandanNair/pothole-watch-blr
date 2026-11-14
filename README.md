@@ -1,5 +1,7 @@
 # pothole-watch-blr
 
+[![CI](https://github.com/NandanNair/pothole-watch-blr/actions/workflows/ci.yml/badge.svg)](https://github.com/NandanNair/pothole-watch-blr/actions/workflows/ci.yml)
+
 Report potholes in Bengaluru with a photo. The app detects the pothole, merges duplicate
 reports of the same spot, maps them, and prepares a complaint for the Greater Bengaluru
 Authority (GBA).
@@ -17,6 +19,27 @@ Authority (GBA).
 | 3 | Deduplication and severity | Not started |
 | 4 | Complaint generation and submission channels | Not started |
 | 5 | Public dashboard | Not started |
+
+## Run it locally
+
+Needs Docker Desktop (with WSL2 on Windows).
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+The API is then at http://localhost:8000 and its interactive docs at http://localhost:8000/docs.
+
+## Run the backend tests
+
+```bash
+cd backend
+python -m venv .venv
+.venv/Scripts/activate        # macOS/Linux: source .venv/bin/activate
+pip install -e ".[dev]"
+ruff check . && ruff format --check . && pytest
+```
 
 ## Licence
 
